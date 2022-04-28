@@ -15,14 +15,15 @@ repository: https://github.com/subquery/terra-subql-starter
 schema:
   file: ./schema.graphql
 network:
-  chainId: bombay-12
-  endpoint: https://bombay-lcd.terra.dev
-  # dictionary: https://api.subquery.network/sq/subquery/terra-columbus-5-dictionary
+  chainId: columbus-5
+  endpoint: https://lcd.terra.dev
+  dictionary: https://api.subquery.network/sq/subquery/terra-columbus-5-dictionary
   # Optionally provide a mantlemint endpoint to further speed up processing
   mantlemint: "https://mantlemint.terra-columbus-5.beta.api.onfinality.io:1320"
 dataSources:
   - kind: terra/Runtime
-    startBlock: 8654032
+    startBlock: 8362748
+    endBlock: 8654032
     mapping:
       file: ./dist/index.js
       handlers:

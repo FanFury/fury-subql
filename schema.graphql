@@ -1,6 +1,13 @@
+type Club @entity {
+  id: ID!
+  owner: String!
+  club_name: String!
+  sport: String!
+}
+
 type Stake @entity {
   id: ID!
-  stake: BigInt!
-  club: String!
-  spender: String!
+  amount: BigInt!
+  club: Club!
+  staker: String!
 }
