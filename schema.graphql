@@ -16,6 +16,10 @@ type Transaction @entity {
   id: ID!
   blockHeight: BigInt!
   timestamp: String!
+  sender: String
+  recipient: String
+  amount: String
+  memo: String
 }
 
 type Message @entity {
@@ -25,4 +29,11 @@ type Message @entity {
   contract: String!
   sender: String!
   executeMsg: String!
+}
+
+type Stake @entity {
+  id: ID!
+  stake: BigInt!
+  club: String!
+  spender: String!
 }

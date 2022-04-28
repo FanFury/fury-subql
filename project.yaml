@@ -1,4 +1,4 @@
-specVersion: 1.0.0
+specVersion: 0.3.0
 name: terra-subql-starter
 version: 0.0.1
 runner:
@@ -22,25 +22,13 @@ network:
   mantlemint: "https://mantlemint.terra-columbus-5.beta.api.onfinality.io:1320"
 dataSources:
   - kind: terra/Runtime
-    startBlock: 4724001
+    startBlock: 8654032
     mapping:
       file: ./dist/index.js
       handlers:
-        - handler: handleBlock
-          kind: terra/BlockHandler
-        - handler: handleTransaction
-          kind: terra/TransactionHandler
-        - handler: handleEvent
-          kind: terra/EventHandler
-          filter:
-            type: transfer
-            messageFilter:
-              type: /terra.wasm.v1beta1.MsgExecuteContract
-              values:
-                contract: terra1j66jatn3k50hjtg2xemnjm8s7y8dws9xqa5y8w
         - handler: handleMessage
           kind: terra/MessageHandler
           filter:
             type: /terra.wasm.v1beta1.MsgExecuteContract
             values:
-              contract: terra1j66jatn3k50hjtg2xemnjm8s7y8dws9xqa5y8w
+              contract: terra1j8y3qk20fxe64g95tqnvthtqzr5rdxq7lvp5zf
