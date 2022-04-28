@@ -1,4 +1,4 @@
-import { Block, Message, Stake, Transaction, TransferEvent } from "../types";
+import { Stake } from "../types";
 import {
   TerraEvent,
   TerraBlock,
@@ -32,16 +32,16 @@ export async function handleMessage(
   msg: TerraMessage<MsgExecuteContract>
 ): Promise<void> {
   logger.info(JSON.stringify(msg.msg.toData().execute_msg));
-  const data : any = msg.msg.toData().execute_msg;
+  const data: any = msg.msg.toData().execute_msg;
   const key = Object.keys(data)[0];
-  if(key === "stake_on_a_club"){
-    const id = `${data.stake_on_a_club.staker}-${data.stake_on_a_club.club_name}`
-    let record = await Stake.get(id)
-    if(!record){
+  if (key === "stake_on_a_club") {
+    const id = `${data.stake_on_a_club.staker}-${data.stake_on_a_club.club_name}`;
+    let record = await Stake.get(id);
+    if (!record) {
       record = new Stake(id);
       record.club = data.stake_on_a_club.club_name;
-      record.spender = data.stake_on_a_club
-      record.stake = BigInt(0); 
+      record.spender = data.stake_on_a_club.staker;
+      record.stake = BigInt(0);
     }
     record.stake += BigInt(data.stake_on_a_club.amount);
     await record.save();

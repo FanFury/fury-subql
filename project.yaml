@@ -3,11 +3,11 @@ name: terra-subql-starter
 version: 0.0.1
 runner:
   node:
-    name: '@subql/node-terra'
-    version: '*'
+    name: "@subql/node-terra"
+    version: "*"
   query:
-    name: '@subql/query'
-    version: '*'
+    name: "@subql/query"
+    version: "*"
 description: >-
   This project can be use as a starting point for developing your Terra based
   SubQuery project
@@ -15,9 +15,9 @@ repository: https://github.com/subquery/terra-subql-starter
 schema:
   file: ./schema.graphql
 network:
-  chainId: columbus-5
-  endpoint: https://terra-columbus-5.beta.api.onfinality.io
-  dictionary: https://api.subquery.network/sq/subquery/terra-columbus-5-dictionary
+  chainId: bombay-12
+  endpoint: https://bombay-lcd.terra.dev
+  # dictionary: https://api.subquery.network/sq/subquery/terra-columbus-5-dictionary
   # Optionally provide a mantlemint endpoint to further speed up processing
   mantlemint: "https://mantlemint.terra-columbus-5.beta.api.onfinality.io:1320"
 dataSources:
