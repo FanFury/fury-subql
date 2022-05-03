@@ -104,7 +104,7 @@ export async function handleBlockMessage(
 export async function handleBlockMessage(block: TerraBlock): Promise<void> {
   //const record = new Block(block.block.block_id.hash);
   //record.height = BigInt(block.block.block.header.height);
-  logger.info("############################");
-  logger.info(JSON.stringify(block));
+  logger.info("Got the BLock message : ############################");
+  logger.info(JSON.stringify(block.block.block));
   //await record.save();
 }
