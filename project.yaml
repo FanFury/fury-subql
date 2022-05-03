@@ -26,8 +26,14 @@ dataSources:
     mapping:
       file: ./dist/index.js
       handlers:
-        - handler: handleBlockMessage
-          kind: terra/BlockHandler
+        #- handler: handleBlockMessage
+        #  kind: terra/BlockHandler
+        #  filter:
+        #    type: /terra.wasm.v1beta1.MsgExecuteContract
+        #    values:
+        #      contract: terra1jfuq655fmqp7uhkkqanmljqj26r9acs68drn2s
+        - handler: handleTransactionMessage
+          kind: terra/TransactionHandler
           filter:
             type: /terra.wasm.v1beta1.MsgExecuteContract
             values:
