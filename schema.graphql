@@ -16,6 +16,4 @@ type Transfer @entity {
   id: ID! # id field is always required and must look like this
   amount: BigInt # Amount that is transferred
   blockNumber: BigInt # The block height of the transfer
-  from: Account! # The account that transfers are made from
-  to: Account! # The account that transfers are made to
 }

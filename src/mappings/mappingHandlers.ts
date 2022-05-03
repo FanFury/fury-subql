@@ -1,5 +1,5 @@
 import { Stake, Club } from '../types';
-import { TerraMessage } from '@subql/types-terra';
+import { TerraMessage, TerraBlock } from '@subql/types-terra';
 import { MsgExecuteContract } from '@terra-money/terra.js';
 
 export async function handleMessage(
@@ -92,10 +92,19 @@ const addStake = async (stakeId, { clubId, stakerAddress, amount }) => {
   await stake.save();
 };
 
+/*
 export async function handleBlockMessage(
   msg: TerraMessage<MsgExecuteContract>
 ): Promise<void> {
-  if (msg.tx.tx.code || msg.tx.tx.codespace) return;
-  if (!Array.isArray(JSON.parse(msg.tx.tx.raw_log))) return;
+  //if (msg.tx.tx.code || msg.tx.tx.codespace) return;
+  //if (!Array.isArray(JSON.parse(msg.tx.tx.raw_log))) return;
   logger.info(JSON.stringify(msg.msg.toData().execute_msg));
+}
+*/
+export async function handleBlockMessage(block: TerraBlock): Promise<void> {
+  //const record = new Block(block.block.block_id.hash);
+  //record.height = BigInt(block.block.block.header.height);
+  logger.info("############################");
+  logger.info(JSON.stringify(block));
+  //await record.save();
 }
