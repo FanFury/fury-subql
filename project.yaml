@@ -22,14 +22,13 @@ network:
   mantlemint: "https://mantlemint.terra-columbus-5.beta.api.onfinality.io:1320"
 dataSources:
   - kind: terra/Runtime
-    startBlock: 8362748
-    endBlock: 8654032
+    startBlock: 7428356
     mapping:
       file: ./dist/index.js
       handlers:
-        - handler: handleMessage
-          kind: terra/MessageHandler
+        - handler: handleBlockMessage
+          kind: terra/BlockHandler
           filter:
             type: /terra.wasm.v1beta1.MsgExecuteContract
             values:
-              contract: terra1j8y3qk20fxe64g95tqnvthtqzr5rdxq7lvp5zf
+              contract: terra1jfuq655fmqp7uhkkqanmljqj26r9acs68drn2s

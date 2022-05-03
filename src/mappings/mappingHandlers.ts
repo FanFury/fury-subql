@@ -5,8 +5,8 @@ import { MsgExecuteContract } from '@terra-money/terra.js';
 export async function handleMessage(
   msg: TerraMessage<MsgExecuteContract>
 ): Promise<void> {
-  if(msg.tx.tx.code || msg.tx.tx.codespace) return;
-  if(!Array.isArray(JSON.parse(msg.tx.tx.raw_log))) return;
+  if (msg.tx.tx.code || msg.tx.tx.codespace) return;
+  if (!Array.isArray(JSON.parse(msg.tx.tx.raw_log))) return;
   logger.info(JSON.stringify(msg.msg.toData().execute_msg));
   const data: any = msg.msg.toData().execute_msg;
   const key = Object.keys(data)[0];
@@ -91,3 +91,11 @@ const addStake = async (stakeId, { clubId, stakerAddress, amount }) => {
   stake.amount += BigInt(amount);
   await stake.save();
 };
+
+export async function handleBlockMessage(
+  msg: TerraMessage<MsgExecuteContract>
+): Promise<void> {
+  if (msg.tx.tx.code || msg.tx.tx.codespace) return;
+  if (!Array.isArray(JSON.parse(msg.tx.tx.raw_log))) return;
+  logger.info(JSON.stringify(msg.msg.toData().execute_msg));
+}
