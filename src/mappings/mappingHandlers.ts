@@ -97,7 +97,7 @@ export async function handleBlockMessage(block: TerraBlock): Promise<void> {
   //const record = new Block(block.block.block_id.hash);
   //record.height = BigInt(block.block.block.header.height);
   logger.info("Block message received: ############################");
-  logger.info(JSON.stringify(block));
+  logger.info(JSON.stringify(block.block));
   //await record.save();
 }
 
@@ -106,6 +106,6 @@ export async function handleTransactionMessage(tx: TerraTransaction): Promise<vo
   //record.blockHeight = BigInt(tx.block.block.block.header.height);
   //record.timestamp = tx.tx.timestamp;
   logger.info("Transcation message received: ############################");
-  logger.info(JSON.stringify(tx));
+  logger.info(JSON.stringify(tx.tx));
   //await record.save();
 }
