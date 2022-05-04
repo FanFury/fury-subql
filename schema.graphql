@@ -17,3 +17,10 @@ type Transfer @entity {
   amount: BigInt # Amount that is transferred
   blockNumber: BigInt # The block height of the transfer
 }
+
+type FuryUstMapping @entity {
+  id: ID!
+  date: Date!
+  usd: Float!
+  fury: Float!
+}
