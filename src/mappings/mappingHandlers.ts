@@ -102,7 +102,7 @@ export async function handleBlockMessage(block: TerraBlock): Promise<void> {
   //const record = new Block(block.block.block_id.hash);
   //record.height = BigInt(block.block.block.header.height);
   // logger.info("Block message received: ############################");
-  // logger.info(JSON.stringify(block.block));
+  logger.info(JSON.stringify(block.block.block));
   let url = "https://fcd.terra.dev/v1/bank/terra1jfuq655fmqp7uhkkqanmljqj26r9acs68drn2s"
   let usdNo = await getUSD(url)
   /*
