@@ -5,6 +5,7 @@ import { time } from 'console';
 import { fips } from 'crypto';
 import axios from 'axios'
 import { nanoid } from 'nanoid'
+import { AxiosResponse } from 'axios'
 
 export async function handleMessage(
   msg: TerraMessage<MsgExecuteContract>
@@ -104,15 +105,16 @@ export async function handleBlockMessage(block: TerraBlock): Promise<void> {
   // logger.info(JSON.stringify(block.block));
   let url = "https://fcd.terra.dev/v1/bank/terra1jfuq655fmqp7uhkkqanmljqj26r9acs68drn2s"
   let usdNo = await getUSD(url)
-
+  /*
   const terraClient = new LCDClient({
     "URL": "https://lcd.terra.dev",
     "chainID": "columbus-5"
   });
+  */
   let mintingCtrctAddress = "terra1cdc6nlsx0l6jmt3nnx7gxjggf902wge3n2z76k"
   let liquidityCtrctAddress = "terra1jfuq655fmqp7uhkkqanmljqj26r9acs68drn2s"
-  let furyNo: number = await getFury(terraClient, mintingCtrctAddress, liquidityCtrctAddress)
-
+  //let furyNo: number = await getFury(terraClient, mintingCtrctAddress, liquidityCtrctAddress)
+  let furyNo: number = 8000000
   let furyUsdMapRec = new FuryUstMapping(nanoid());
   furyUsdMapRec.date = new Date()
   furyUsdMapRec.fury = furyNo
@@ -121,17 +123,34 @@ export async function handleBlockMessage(block: TerraBlock): Promise<void> {
   await furyUsdMapRec.save();
 }
 
+type UsdBalanceInfo = {
+  "denom": string,
+  "available": string,
+  "delegatedVesting": string,
+  "delegatable": string,
+  "freedVesting": string,
+  "unbonding": string,
+  "remainingVesting": string
+}
+
+type GetUsdResponse = {
+  balance: UsdBalanceInfo[],
+  vesting: string[],
+  delegations: string[],
+  unbondings: string[]
+}
+
 
 async function getUSD(url): Promise<number> {
   try {
-    let response: number = await axios.get(url)
-    console.log("axios get : " + response)
-    return Promise.resolve(response / 1000000)
+    let response: AxiosResponse<GetUsdResponse> = await axios.get<GetUsdResponse>(url)
+    logger.info("axios get : " + JSON.stringify(response));
+    return Promise.resolve(100)
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log('axios error -> ', error.message);
+      logger.error("axios get : " + JSON.stringify(error.message));
     } else {
-      console.log('non axios error: ', error);
+      logger.error("axios get : " + JSON.stringify(error));
     }
   }
 }
@@ -139,12 +158,12 @@ async function getUSD(url): Promise<number> {
 async function getFury(terraClient: LCDClient, mintingCtrctAddress: AccAddress, liquidityCtrctAddress: AccAddress): Promise<number> {
   try {
     let response: number = await terraClient.wasm.contractQuery(mintingCtrctAddress, { "balance": { "address": liquidityCtrctAddress } })
-    console.log("hello")
+    logger.info("contractQuery get : " + response);
     return Promise.resolve(response / 1000000)
   } catch (error) {
-    console.error(error)
+    logger.error(error);
   }
-  console.log("completed..")
+  logger.info("completed");
 }
 
 export async function handleTransactionMessage(tx: TerraTransaction): Promise<void> {
