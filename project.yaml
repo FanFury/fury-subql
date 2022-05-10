@@ -23,7 +23,6 @@ network:
 dataSources:
   - kind: terra/Runtime
     startBlock: 8362748
-    endBlock: 8654032
     mapping:
       file: ./dist/index.js
       handlers:
